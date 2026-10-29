@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>IronPulse – Train Smarter</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;600;700&display=swap">
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+--bg:#f6f3ee;--card:#fff;--tx:#15151a;--mu:#63636f;--p:#f0401f;--s:#f59e0b;--c:#0ea5a4;--bd:#e7e2d9;--g:linear-gradient(135deg,var(--p),var(--s));--hd:'Bebas Neue',Impact,'Arial Narrow',sans-serif;--bf:'Outfit',system-ui,-apple-system,'Segoe UI',sans-serif}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#0a0a0f;--card:#14141c;--tx:#f4f4f8;--mu:#9b9bab;--p:#ff5a36;--s:#ffb703;--c:#2dd4bf;--bd:#262634}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#0a0a0f;--card:#14141c;--tx:#f4f4f8;--mu:#9b9bab;--p:#ff5a36;--s:#ffb703;--c:#2dd4bf;--bd:#262634}
+*{box-sizing:border-box}html{scroll-padding-top:80px}
+body{margin:0;background:var(--bg);color:var(--tx);font:17px/1.6 var(--bf);overflow-x:hidden}
+h1,h2,h3,.hd{font-family:var(--hd);font-weight:400;letter-spacing:1px;text-transform:uppercase;line-height:1.05;margin:0}
+h2{font-size:clamp(2.2rem,5vw,3.4rem)}h3{font-size:1.5rem}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:#0a0a0f;z-index:51}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:#0a0a0fe6;backdrop-filter:blur(10px);border-bottom:1px solid #ffffff18}
+.nav{max-width:1180px;margin:auto;display:flex;align-items:center;gap:4px;padding:10px 16px}
+.logo{font:28px var(--hd);letter-spacing:2px;color:#fff;text-decoration:none;margin-right:auto}.logo span{background:var(--g);-webkit-background-clip:text;background-clip:text;color:transparent}
+.nav a.l{color:#c9c9d6;text-decoration:none;font-size:15px;padding:7px 12px;border-radius:999px;transition:.25s}
+.nav a.l:hover{color:#fff;background:#ffffff1a}.nav a.l.on{background:var(--g);color:#fff}
+.ib{background:none;border:1px solid #ffffff33;color:#fff;border-radius:10px;padding:6px 10px;cursor:pointer;font-size:16px}
+.bur{display:none}
+@media(max-width:860px){.bur{display:block}.nav{flex-wrap:wrap}.nav a.l{display:none;width:100%;padding:11px 14px}.menu .nav a.l{display:block}.logo{order:0}}
+.page{display:none}.page.active{display:block;animation:pg .55s cubic-bezier(.2,.8,.2,1)}
+@keyframes pg{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+.wrap{max-width:1180px;margin:auto;padding:56px 18px}
+.ph{background:#0a0a0f;color:#fff;position:relative;overflow:hidden;padding:64px 18px 56px;text-align:center}
+.ph::before,.hero::before{content:"";position:absolute;width:520px;height:520px;left:-120px;top:-200px;background:radial-gradient(circle,#ff5a3666,transparent 65%);animation:fl 9s ease-in-out infinite alternate}
+.ph::after,.hero::after{content:"";position:absolute;width:480px;height:480px;right:-120px;bottom:-220px;background:radial-gradient(circle,#2dd4bf44,transparent 65%);animation:fl 11s ease-in-out infinite alternate-reverse}
+@keyframes fl{to{transform:translate(90px,60px) scale(1.25)}}
+.ph>*,.hero>*{position:relative;z-index:1}.ph h1{font-size:clamp(2.8rem,8vw,5rem)}.ph p{color:#b9b9c8;max-width:620px;margin:10px auto 0}
+.grad{background:var(--g);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero{position:relative;overflow:hidden;background:#0a0a0f;color:#fff;text-align:center;padding:96px 18px 80px}
+.hero h1{font-size:clamp(3.2rem,12vw,8rem);line-height:.95}.hero p{max-width:600px;margin:18px auto 28px;color:#c3c3d2;font-size:1.1rem}
+#rw{display:inline-block;transition:.4s}
+.btn{display:inline-block;background:var(--g);color:#fff;border:0;padding:12px 26px;border-radius:999px;font:600 16px var(--bf);cursor:pointer;text-decoration:none;transition:.25s;box-shadow:0 8px 24px #f0401f44}
+.btn:hover{transform:translateY(-3px) scale(1.03)}.btn.o{background:none;box-shadow:none;border:2px solid currentColor}.btn.sm{padding:7px 16px;font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px;margin-top:-44px;position:relative;z-index:2}
+.stat{background:var(--card);border:1px solid var(--bd);border-radius:18px;padding:18px;text-align:center;box-shadow:0 10px 30px #0002}
+.stat b{font:3rem var(--hd);display:block;line-height:1}.stat span{color:var(--mu);font-size:14px}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));margin-top:22px}
+.card{position:relative;background:var(--card);border:1px solid var(--bd);border-radius:18px;padding:22px;transition:.3s;overflow:hidden}
+.card::before{content:"";position:absolute;inset:0;background:radial-gradient(260px circle at var(--mx,50%) var(--my,0),#ff5a3622,transparent 60%);opacity:0;transition:.3s;pointer-events:none}
+.card:hover{transform:translateY(-6px);border-color:var(--p)}.card:hover::before{opacity:1}
+.card .i{font-size:34px;display:inline-block;transition:.3s}.card:hover .i{transform:scale(1.25) rotate(-8deg)}
+.card h3{margin:6px 0}.card p,.card li{color:var(--mu);font-size:15px;margin:0}.card ul{padding-left:18px;margin:8px 0 0}
+a.card{text-decoration:none;color:inherit;display:block}
+.lead{color:var(--mu);max-width:700px;font-size:1.05rem;margin:8px 0 0}
+.rv{opacity:0;transform:translateY(30px);transition:.7s cubic-bezier(.2,.8,.2,1)}.rv.in{opacity:1;transform:none}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:22px 0 10px}
+.tab{background:var(--card);border:1px solid var(--bd);color:var(--tx);padding:9px 18px;border-radius:999px;cursor:pointer;font:600 15px var(--bf);text-decoration:none;transition:.25s}
+.tab:hover{border-color:var(--p)}.tab.on{background:var(--g);color:#fff;border-color:transparent}
+.bar{height:10px;background:var(--bd);border-radius:9px;overflow:hidden;margin:6px 0}.bar i{display:block;height:100%;background:var(--g);width:0;transition:width .6s}
+.day h3{color:var(--p)}.day label{display:flex;gap:9px;align-items:flex-start;padding:5px 0;cursor:pointer;color:var(--tx);font-size:15px}
+.day input{accent-color:var(--p);width:18px;height:18px;margin-top:3px}.day label:has(input:checked){opacity:.45;text-decoration:line-through}
+.tip{border-left:4px solid var(--s);background:var(--card);padding:14px 18px;border-radius:0 12px 12px 0;margin-top:16px;color:var(--mu)}
+.tip b{color:var(--tx)}
+label.f{display:block;font-size:13px;color:var(--mu);margin:10px 0 3px}
+input,select{width:100%;padding:10px;border-radius:10px;border:1px solid var(--bd);background:var(--bg);color:var(--tx);font:inherit}
+input:focus,select:focus{outline:2px solid var(--p)}
+.row{display:grid;gap:10px;grid-template-columns:1fr 1fr}
+.res{margin-top:14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:8px}
+.res div{background:var(--bg);border:1px solid var(--bd);border-radius:12px;padding:10px;text-align:center}
+.res b{display:block;font:1.9rem var(--hd);background:var(--g);-webkit-background-clip:text;background-clip:text;color:transparent}.res span{font-size:12px;color:var(--mu)}
+.two{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));align-items:start}
+table{border-collapse:collapse;width:100%;min-width:520px}th,td{padding:11px;border-bottom:1px solid var(--bd);text-align:left;font-size:15px}th{color:var(--mu);font-weight:600}
+.ow{overflow-x:auto}.pb{height:8px;background:var(--bd);border-radius:8px;min-width:90px}.pb i{display:block;height:100%;background:var(--g);border-radius:8px}
+details{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:14px 18px;margin-top:10px;transition:.25s}
+details[open]{border-color:var(--p)}summary{cursor:pointer;font-weight:600;list-style:none}summary::after{content:"+";float:right;color:var(--p);font-size:20px}details[open] summary::after{content:"–"}
+details p{color:var(--mu);margin:8px 0 0}
+.ring{position:relative;width:240px;height:240px;margin:10px auto}.ring svg{transform:rotate(-90deg)}
+.ring .c{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.ring .c b{font:4.2rem var(--hd);line-height:1}.ring .c span{letter-spacing:3px;font-weight:700;color:var(--mu)}
+.btns{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:12px}
+.gauge{height:12px;border-radius:9px;background:linear-gradient(90deg,#38bdf8,#22c55e 35%,#f59e0b 60%,#ef4444);position:relative;margin:16px 4px 4px}
+.gauge i{position:absolute;top:-5px;width:6px;height:22px;background:var(--tx);border-radius:4px;transition:left .5s;left:0}
+.q{font:clamp(1.6rem,3.6vw,2.4rem)/1.2 var(--hd);text-align:center;max-width:800px;margin:auto;min-height:3.6em;transition:opacity .4s}
+footer{background:#0a0a0f;color:#8b8b9b;text-align:center;padding:34px 16px;font-size:14px}footer a{color:#c9c9d6}
+@media print{header,.btns,footer,.ph{display:none}}
+#login{position:fixed;inset:0;z-index:100;background:radial-gradient(circle at 20% 10%,#ff5a3655,transparent 45%),radial-gradient(circle at 85% 90%,#2dd4bf44,transparent 45%),#0a0a0f;display:flex;align-items:center;justify-content:center;padding:20px}
+body.in #login{display:none}body:not(.in) main,body:not(.in) footer,body:not(.in) #links,body:not(.in) .bur{display:none}
+.lc{width:100%;max-width:400px;text-align:center;color:#fff;display:flex;flex-direction:column;gap:12px}.lc p{color:#b9b9c8;margin:0}.lc small{color:#9b9bab}
+#login input,#login select{background:#14141c;color:#fff;border-color:#2b2b3a}
+textarea{width:100%;padding:10px;border-radius:10px;border:1px solid var(--bd);background:var(--bg);color:var(--tx);font:inherit;resize:vertical}
+.btn:disabled{cursor:default;transform:none}
+.bd{display:inline-block;padding:2px 12px;border-radius:999px;font-size:13px;font-weight:600}.bd.g{background:#22c55e26;color:#16a34a}.bd.a{background:#f59e0b26;color:#d97706}.bd.r{background:#ef444426;color:#ef4444}.bd.gr{background:#8884;color:var(--mu)}
+.nt{padding:10px 0;border-bottom:1px solid var(--bd)}.nt small{color:var(--mu);margin-left:8px}.nt p{margin:2px 0 0;color:var(--mu)}
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;text-align:center;margin-top:10px}.cal b{color:var(--mu);font-size:13px}.cal span{padding:7px 0;border-radius:10px;background:var(--bg);font-size:14px}.cal .hit{background:var(--g);color:#fff;font-weight:700}.cal .tdy{outline:2px solid var(--c)}
+.chat{height:340px;overflow-y:auto;display:flex;flex-direction:column;gap:8px;padding:10px;background:var(--bg);border-radius:14px}
+.bub{max-width:85%;padding:10px 14px;border-radius:16px;white-space:pre-wrap;font-size:15px;animation:pg .3s}.bub.b{background:var(--card);border:1px solid var(--bd);align-self:flex-start}.bub.u{background:var(--g);color:#fff;align-self:flex-end}
+.bn{background:var(--p);color:#fff;border-radius:999px;font-size:11px;padding:0 6px;margin-left:4px;display:none}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translate(-50%,40px);background:#14141c;color:#fff;border:1px solid var(--p);padding:11px 20px;border-radius:999px;opacity:0;transition:.35s;z-index:200;max-width:90vw}.toast.s{opacity:1;transform:translate(-50%,0)}
+.res .sm{font-size:1.2rem}
+</style>
+</head>
+<body>
+<div id="login"><div class="lc"><div class="logo hd" style="font-size:3rem;color:#fff">IRON<span class="grad">PULSE</span></div><p>Sign in with your name and mobile number</p><input id="ln" placeholder="Your full name" autocomplete="name"><input id="lp" type="tel" inputmode="numeric" placeholder="Mobile number (10 digits)" maxlength="15" autocomplete="tel"><input id="lotp" type="tel" inputmode="numeric" placeholder="6-digit OTP" maxlength="6" autocomplete="one-time-code" style="display:none"><button class="btn" id="lb" disabled>Connecting…</button><small id="lm"></small></div></div>
+<header><div class="nav"><a class="logo" href="#home">IRON<span>PULSE</span></a><span id="links" style="display:contents"></span><button class="ib bur" onclick="document.body.classList.toggle('menu')" aria-label="Menu">☰</button><span id="who" style="display:contents"></span><button class="ib" id="th" aria-label="Toggle theme">🌓</button></div></header>
+<main>
+
+<section class="page" id="p-home">
+<div class="hero"><h1>Get <span id="rw" class="grad">STRONGER</span><br>Every Single Day</h1>
+<p>Workout plans, HIIT, calorie and diet guidance, protein sources and smart gym tools, all in one place.</p>
+<a class="btn" href="#workouts">Start Training</a> <a class="btn o" href="#tools-timer" style="color:#fff;margin-left:6px">Open Timer</a></div>
+<div class="wrap" style="padding-top:0"><div class="stats" id="stats"></div>
+<h2 class="rv" style="margin-top:60px">Choose Your <span class="grad">Goal</span></h2>
+<div class="grid">
+<a class="card rv" href="#workouts-lean"><div class="i">🔥</div><h3>Get Lean</h3><p>Cut fat while keeping muscle with strength days, HIIT and a small calorie deficit.</p></a>
+<a class="card rv" href="#workouts-bulk"><div class="i">🦍</div><h3>Bulk Up</h3><p>Heavy compound lifts and a calorie surplus to pack on size and strength.</p></a>
+<a class="card rv" href="#workouts-general"><div class="i">💪</div><h3>Build Muscle</h3><p>A balanced 5-day split for everyday gym-goers.</p></a></div>
+<h2 class="rv" style="margin-top:60px">Explore the <span class="grad">Site</span></h2><div class="grid" id="explore"></div>
+<div class="q rv" id="quote" style="margin-top:70px"></div></div>
+</section>
+
+<section class="page" id="p-learn"><div class="ph"><h1>Why <span class="grad">Gym?</span></h1><p>The benefits, the training styles and answers to common questions.</p></div>
+<div class="wrap"><h2 class="rv">Benefits</h2><div class="grid" id="benefits"></div>
+<h2 class="rv" style="margin-top:56px">Types of Training</h2><div class="grid" id="types"></div>
+<h2 class="rv" style="margin-top:56px">Quick FAQ</h2><div id="faq"></div></div></section>
+
+<section class="page" id="p-workouts"><div class="ph"><h1>Workout <span class="grad">Plans</span></h1><p>Pick a goal, tick off every exercise as you finish it and watch your weekly progress bar fill.</p></div>
+<div class="wrap" style="padding-top:34px"><div class="tabs" id="planTabs"></div><div class="tip" id="planTip"></div>
+<div style="margin-top:18px"><b id="progTxt"></b><div class="bar"><i id="prog"></i></div></div>
+<div class="grid" id="planGrid"></div><div class="btns" style="justify-content:flex-start"><button class="btn o sm" onclick="resetPlan()">Reset week</button></div>
+<div class="tip"><b>Golden rules:</b> warm up 5–10 minutes, use full range of motion, add a little weight each week, sleep 7–9 hours and take at least one full rest day.</div></div></section>
+
+<section class="page" id="p-cardio"><div class="ph"><h1>Cardio &amp; <span class="grad">HIIT</span></h1><p>Short, intense intervals that burn fat and build stamina. Tap “Load in timer” to start instantly.</p></div>
+<div class="wrap"><div class="grid" id="hiit"></div>
+<div class="tip"><b>20-minute circuit:</b> burpees, mountain climbers, jump squats, high knees, plank jacks. 40 s work, 20 s rest, 4 rounds. Rest 1 minute between rounds.</div></div></section>
+
+<section class="page" id="p-nutrition"><div class="ph"><h1>Calories &amp; <span class="grad">Diet</span></h1><p>Find your daily calories and macros. Results update as you type.</p></div>
+<div class="wrap"><div class="two"><div class="card"><h3>Calorie Calculator</h3>
+<div class="row"><div><label class="f">Age</label><input id="age" type="number" value="25"></div><div><label class="f">Gender</label><select id="sex"><option value="m">Male</option><option value="f">Female</option></select></div></div>
+<div class="row"><div><label class="f">Height (cm)</label><input id="ht" type="number" value="172"></div><div><label class="f">Weight (kg)</label><input id="wt" type="number" value="70"></div></div>
+<label class="f">Activity</label><select id="act"><option value="1.2">Sedentary</option><option value="1.375">Light (1–3 days)</option><option value="1.55" selected>Moderate (3–5 days)</option><option value="1.725">Very active (6–7 days)</option></select>
+<label class="f">Goal</label><select id="goal"><option value="-400">Lean / fat loss (−400)</option><option value="0">Maintain</option><option value="350" selected>Lean bulk (+350)</option><option value="600">Bulk (+600)</option></select>
+<div class="res" id="calRes"></div></div>
+<div class="card" style="text-align:center"><h3>Macro Split</h3><svg id="donut" viewBox="0 0 120 120" width="220" height="220" style="transform:rotate(-90deg)"></svg><div id="legend" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;font-size:14px;color:var(--mu)"></div></div></div>
+<h2 class="rv" style="margin-top:56px">Diet Management</h2><div id="tips"></div>
+<h2 class="rv" style="margin-top:56px">Sample Day</h2><div class="tabs"><button class="tab on" data-m="nv">Non-veg</button><button class="tab" data-m="v">Vegetarian</button></div><div class="grid" id="meals"></div></div></section>
+
+<section class="page" id="p-protein"><div class="ph"><h1>Protein <span class="grad">Sources</span></h1><p>Search and filter the best foods. Bars compare protein per serving.</p></div>
+<div class="wrap" style="padding-top:34px"><div class="two" style="grid-template-columns:2fr 1fr"><input id="ps" placeholder="Search food, e.g. paneer"><input id="pw" type="number" placeholder="Your weight (kg) → daily protein"></div>
+<div id="pneed" class="tip" style="display:none"></div><div class="tabs" id="pf"></div>
+<div class="card ow"><table><thead><tr><th>Food</th><th>Serving</th><th>Protein</th><th></th><th>Type</th></tr></thead><tbody id="pb"></tbody></table></div></div></section>
+
+<section class="page" id="p-tools"><div class="ph"><h1>Gym <span class="grad">Tools</span></h1><p>Timer, weekly timetable, calculators and trackers. Your data stays saved on this device.</p></div>
+<div class="wrap" style="padding-top:34px"><div class="tabs" id="toolTabs"></div>
+<div class="tl" id="t-timer"><div class="two"><div class="card"><h3>Interval Timer</h3><div class="row"><div><label class="f">Work (s)</label><input id="tw" type="number" value="40"></div><div><label class="f">Rest (s)</label><input id="tr" type="number" value="20"></div></div><label class="f">Rounds</label><input id="tn" type="number" value="8">
+<div class="btns"><span style="color:var(--mu);align-self:center">Quick rest:</span><button class="btn o sm" onclick="tRest(30)">30s</button><button class="btn o sm" onclick="tRest(60)">60s</button><button class="btn o sm" onclick="tRest(90)">90s</button><button class="btn o sm" onclick="tRest(120)">2m</button></div></div>
+<div class="card"><div class="ring"><svg width="240" height="240"><circle cx="120" cy="120" r="104" fill="none" stroke="var(--bd)" stroke-width="12"/><circle id="rg" cx="120" cy="120" r="104" fill="none" stroke="var(--p)" stroke-width="12" stroke-linecap="round" stroke-dasharray="653.5" stroke-dashoffset="0" style="transition:stroke-dashoffset 1s linear,stroke .3s"/></svg><div class="c"><span id="tph">READY</span><b id="tclk">00:00</b><span id="trd" style="font-size:13px;letter-spacing:1px"></span></div></div>
+<div class="btns"><button class="btn" onclick="tStart()">Start / Pause</button><button class="btn o" onclick="tReset()">Reset</button></div></div></div></div>
+<div class="tl" id="t-planner"><div class="card"><h3>Weekly Routine &amp; Timetable</h3><p>Choose a workout, time and notes for each day. Saved automatically.</p><div class="ow"><table><thead><tr><th>Day</th><th>Workout</th><th>Time</th><th>Notes</th></tr></thead><tbody id="planner"></tbody></table></div><div class="btns"><button class="btn o sm" onclick="window.print()">Print</button><button class="btn o sm" onclick="clearPlan()">Reset</button></div></div></div>
+<div class="tl" id="t-calc"><div class="two"><div class="card"><h3>BMI</h3><div class="row"><div><label class="f">Height (cm)</label><input id="bh" type="number" value="172"></div><div><label class="f">Weight (kg)</label><input id="bw" type="number" value="70"></div></div><div class="gauge"><i id="gm"></i></div><div class="res" id="bmiRes"></div></div>
+<div class="card"><h3>One-Rep Max</h3><div class="row"><div><label class="f">Weight lifted (kg)</label><input id="ow" type="number" value="60"></div><div><label class="f">Reps</label><input id="orp" type="number" value="8"></div></div><div class="res" id="ormRes"></div></div></div></div>
+<div class="tl" id="t-track"><div class="two"><div class="card" style="text-align:center"><h3>Water Tracker</h3><div class="hd" id="wTxt" style="font-size:4rem">0 L</div><div class="bar"><i id="wBar"></i></div><div class="btns"><button class="btn sm" onclick="water(.25)">+250 ml</button><button class="btn sm" onclick="water(.5)">+500 ml</button><button class="btn o sm" onclick="water(0)">Reset</button></div><p style="font-size:13px;color:var(--mu)">Goal 3.5 L. Resets daily.</p></div>
+<div class="card"><h3>Body Weight Log</h3><div class="row"><input id="lw" type="number" step=".1" placeholder="Today kg"><button class="btn sm" onclick="addW()">Add</button></div><svg id="spark" viewBox="0 0 300 90" style="width:100%;margin-top:10px"></svg><p id="wInfo" style="font-size:14px;color:var(--mu)"></p></div></div></div>
+</div></section>
+<section class="page" id="p-app"><div class="ph"><h1 id="appH">My <span class="grad">Gym</span></h1><p id="appP"></p></div><div class="wrap" style="padding-top:30px"><div class="tabs" id="appTabs"></div><div id="appRoot"></div></div></section>
+</main>
+<footer>© 2026 IronPulse · General fitness information, not medical advice. Check with a doctor before starting a new programme.</footer>
+
+<script>
+const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
+const LS={g(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},s(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+const th=LS.g('theme','dark');document.documentElement.dataset.theme=th;
+$('#th').onclick=()=>{const r=document.documentElement;r.dataset.theme=r.dataset.theme==='dark'?'light':'dark';LS.s('theme',r.dataset.theme)};
+const PG=[['home','Home','🏠','Start here'],['learn','Why Gym','🧠','Benefits, training types and FAQ.'],['workouts','Workouts','🏋️','Lean, bulk and general plans with a progress tracker.'],['cardio','Cardio/HIIT','⚡','Fat-burning intervals you can load into the timer.'],['nutrition','Nutrition','🥗','Calorie and macro calculator and diet guide.'],['protein','Protein','🍗','Searchable protein food table.'],['tools','Tools','🛠️','Timer, timetable, BMI, 1RM and trackers.'],['app','My Gym','🏟️','Attendance, payments, alerts and your AI assistant.']];
+const mkNav=()=>{$('#links').innerHTML=PG.map(p=>`<a class="l" data-p="${p[0]}" href="#${p[0]}">${p[1]}</a>`).join('')};mkNav();
+$('#explore').innerHTML=PG.slice(1).map(p=>`<a class="card rv" href="#${p[0]}"><div class="i">${p[2]}</div><h3>${p[1]}</h3><p>${p[3]}</p></a>`).join('');
+const C=(i,t,p)=>`<div class="card rv"><div class="i">${i}</div><h3>${t}</h3><p>${p}</p></div>`;
+$('#benefits').innerHTML=[['❤️','Heart Health','Lowers resting heart rate and blood pressure.'],['💪','Muscle & Strength','More lean muscle raises metabolism and protects joints.'],['🦴','Strong Bones','Lifting increases bone density.'],['🔥','Fat Loss','Burns calories during and after training.'],['🧠','Mental Health','Improves mood and reduces stress.'],['😴','Better Sleep','Fall asleep faster and sleep deeper.'],['🩸','Blood Sugar','Better insulin sensitivity.'],['⚡','Energy & Longevity','More daily energy and healthier ageing.']].map(a=>C(...a)).join('');
+$('#types').innerHTML=[['🏋️','Weight Training','Barbells, dumbbells and machines for muscle and strength.'],['🏃','Cardio','Treadmill, cycling and rowing for stamina.'],['⚡','HIIT','Short intense intervals for fast fat loss.'],['🤸','Calisthenics','Bodyweight skills like push-ups and pull-ups.'],['🔁','Circuit Training','Stations back to back with little rest.'],['🏆','Powerlifting','Max strength in squat, bench and deadlift.'],['🧘','Mobility & Yoga','Flexibility and recovery work.'],['🛷','Functional','Kettlebells, sleds and medicine balls.']].map(a=>C(...a)).join('');
+const acc=a=>a.map(x=>`<details class="rv"><summary>${x[0]}</summary><p>${x[1]}</p></details>`).join('');
+$('#faq').innerHTML=acc([['How many days a week should I train?','Beginners do well with 3–4 days; intermediates with 4–6. Always keep at least one rest day.'],['Will lifting make women bulky?','No. Building large muscle needs a big surplus and years of heavy training. Lifting mostly gives a toned, strong physique.'],['Cardio or weights first?','Weights first if strength or muscle is the goal. Cardio first only if endurance is your priority.'],['How long until I see results?','Strength gains appear in 2–4 weeks; visible body changes usually take 8–12 weeks of consistency.']]);
+$('#tips').innerHTML=acc([['Protein','Aim for 1.6–2.2 g per kg body weight daily, with protein in every meal.'],['Carbohydrates','3–6 g/kg. Oats, rice, roti, potatoes and fruit fuel workouts and recovery.'],['Healthy fats','0.8–1 g/kg from nuts, seeds, eggs, ghee and olive oil.'],['Meal timing','Eat carbs and protein 1–2 hours before training and again within 2 hours after.'],['Hydration','Drink 3–4 litres daily and more when you sweat heavily.'],['Adjusting calories','Weigh weekly. If progress stalls for 2–3 weeks, change calories by 100–200.']]);
+
+// plans
+const PLANS={general:{n:'General Muscle',tip:'5-day split for a regular gym-goer. Each muscle group gets trained about once a week.',d:[['Mon · Chest + Triceps',['Barbell Bench Press 4×8–10','Incline Dumbbell Press 3×10','Cable Fly 3×12','Tricep Pushdown 3×12','Overhead Extension 3×12']],['Tue · Back + Biceps',['Deadlift 3×6','Lat Pulldown 4×10','Seated Cable Row 3×10','Barbell Curl 3×10','Hammer Curl 3×12']],['Wed · Legs',['Back Squat 4×8','Leg Press 3×12','Romanian Deadlift 3×10','Leg Curl 3×12','Calf Raise 4×15']],['Thu · Shoulders + Abs',['Overhead Press 4×8','Lateral Raise 4×12–15','Rear Delt Fly 3×15','Shrugs 3×12','Plank 3×45 s','Hanging Leg Raise 3×12']],['Fri · Arms + Core',['Close-grip Bench 3×10','Dips 3×10','EZ-bar Curl 3×10','Preacher Curl 3×12','Cable Crunch 3×15']],['Sat · Cardio',['30 min brisk walk or cycling','15 min stretching']]]},
+lean:{n:'Lean / Cutting',tip:'Keep lifts heavy to hold muscle in a small deficit, and add HIIT 2–3 times a week.',d:[['Mon · Upper Body',['Bench Press 4×8','Pull-ups 4×8','DB Shoulder Press 3×10','Seated Row 3×12','Lateral Raise 3×15']],['Tue · Lower Body',['Squat 4×8','Romanian Deadlift 3×10','Walking Lunges 3×12/leg','Leg Curl 3×12','Calf Raise 4×15']],['Wed · HIIT + Abs',['HIIT 20 min (40s on / 20s off)','Plank 3×60 s','Russian Twist 3×20','Leg Raise 3×15']],['Thu · Upper Body',['Incline DB Press 4×10','Lat Pulldown 4×10','Face Pull 3×15','Curl + Pushdown superset 3×12']],['Fri · Full Body Circuit',['Deadlift 3×8','Push-ups 3×15','Goblet Squat 3×15','Kettlebell Swing 3×20','Battle Ropes 3×30 s']],['Sat · Steady Cardio',['40–45 min incline walk or cycling']]]},
+bulk:{n:'Bulking',tip:'Eat 300–600 kcal above maintenance, lift heavy (5–10 reps), rest 2–3 minutes and keep cardio light.',d:[['Mon · Push',['Bench Press 5×5','Incline DB Press 4×8','Overhead Press 4×6–8','Lateral Raise 4×12','Skull Crushers 3×10']],['Tue · Pull',['Deadlift 4×5','Barbell Row 4×8','Weighted Pull-ups 3×8','Face Pull 3×15','Barbell Curl 4×8']],['Wed · Legs',['Back Squat 5×5','Leg Press 4×10','Romanian Deadlift 4×8','Leg Extension 3×12','Calf Raise 5×12']],['Fri · Upper Power',['Incline Barbell Press 4×6','T-bar Row 4×8','Dips 3×10','Arnold Press 3×10','Hammer Curl 3×10']],['Sat · Lower + Core',['Front Squat 4×6','Hip Thrust 4×10','Walking Lunges 3×12','Hanging Leg Raise 4×12']]]}};
+let cp='general',done=LS.g('done',{});
+function showPlan(k){cp=PLANS[k]?k:'general';const p=PLANS[cp];
+$('#planTabs').innerHTML=Object.entries(PLANS).map(([i,v])=>`<a class="tab ${i===cp?'on':''}" href="#workouts-${i}">${v.n}</a>`).join('');
+$('#planTip').textContent=p.tip;
+$('#planGrid').innerHTML=p.d.map((d,i)=>`<div class="card day"><h3>${d[0]}</h3>${d[1].map((e,j)=>{const k=cp+i+'_'+j;return `<label><input type="checkbox" data-k="${k}" ${done[k]?'checked':''}><span>${e}</span></label>`}).join('')}</div>`).join('');prog()}
+function prog(){const a=$$('#planGrid input'),n=a.filter(x=>x.checked).length;$('#prog').style.width=(a.length?n/a.length*100:0)+'%';$('#progTxt').textContent=`Weekly progress: ${n}/${a.length} exercises done`}
+$('#planGrid').addEventListener('change',e=>{done[e.target.dataset.k]=e.target.checked;LS.s('done',done);prog()});
+function resetPlan(){Object.keys(done).forEach(k=>k.startsWith(cp)&&delete done[k]);LS.s('done',done);showPlan(cp)}
+
+// hiit
+const H=[['🔥','Tabata','20 s all-out, 10 s rest × 8 rounds. Burpees or squat jumps.',[20,10,8]],['🚴','Bike Sprints','30 s max effort, 90 s easy pace × 8.',[30,90,8]],['🏃','Treadmill Intervals','1 min fast, 1 min walk × 10. Raise the incline for extra burn.',[60,60,10]],['🧗','Climbers & Burpees','45 s work, 15 s rest × 8. Full-body fat burner.',[45,15,8]],['🪢','Jump Rope','1 min fast skipping, 30 s rest × 8.',[60,30,8]],['🛶','Rowing Machine','250 m hard (~60 s), 60 s rest × 6.',[60,60,6]]];
+$('#hiit').innerHTML=H.map(h=>`<div class="card rv"><div class="i">${h[0]}</div><h3>${h[1]}</h3><p>${h[2]}</p><div class="btns" style="justify-content:flex-start"><button class="btn sm" data-pre="${h[3]}">Load in timer</button></div></div>`).join('');
+$('#hiit').onclick=e=>{const b=e.target.closest('[data-pre]');if(!b)return;const[w,r,n]=b.dataset.pre.split(',');$('#tw').value=w;$('#tr').value=r;$('#tn').value=n;tReset();location.hash='#tools-timer'};
+
+// nutrition
+function calc(){const a=+$('#age').value,h=+$('#ht').value,w=+$('#wt').value;if(!(a>0&&h>0&&w>0))return;
+const bmr=10*w+6.25*h-5*a+($('#sex').value==='m'?5:-161),td=bmr*$('#act').value,t=Math.round(td+ +$('#goal').value),p=Math.round(w*2),f=Math.round(w*.9),c=Math.max(0,Math.round((t-p*4-f*9)/4));
+$('#calRes').innerHTML=`<div><b>${Math.round(bmr)}</b><span>BMR</span></div><div><b>${Math.round(td)}</b><span>Maintenance</span></div><div><b>${t}</b><span>Target kcal</span></div><div><b>${p}g</b><span>Protein</span></div><div><b>${c}g</b><span>Carbs</span></div><div><b>${f}g</b><span>Fats</span></div>`;
+const seg=[[p*4,'#ff5a36','Protein'],[c*4,'#ffb703','Carbs'],[f*9,'#2dd4bf','Fats']],tot=seg.reduce((s,x)=>s+x[0],0)||1,R=48,L=2*Math.PI*R;let off=0;
+$('#donut').innerHTML=seg.map(s=>{const l=s[0]/tot*L,o=`<circle cx="60" cy="60" r="${R}" fill="none" stroke="${s[1]}" stroke-width="14" stroke-dasharray="${l} ${L-l}" stroke-dashoffset="${-off}" style="transition:.6s"/>`;off+=l;return o}).join('')+`<text x="60" y="64" text-anchor="middle" transform="rotate(90 60 60)" fill="currentColor" font-size="16" font-family="Bebas Neue,Impact">${t}</text>`;
+$('#legend').innerHTML=seg.map(s=>`<span><b style="color:${s[1]}">●</b> ${s[2]} ${Math.round(s[0]/tot*100)}%</span>`).join('')}
+['age','sex','ht','wt','act','goal'].forEach(i=>$('#'+i).addEventListener('input',calc));
+const ML={nv:[['🍳','Breakfast','3-egg omelette, 2 toast, banana, milk'],['🥣','Snack','Greek yogurt with nuts'],['🍗','Lunch','150 g chicken, rice, dal, salad'],['🍌','Pre-workout','Banana and peanut butter toast'],['🥤','Post-workout','Whey shake and fruit'],['🐟','Dinner','Fish, 2 rotis, vegetables']],v:[['🥛','Breakfast','Paneer paratha, curd, fruit'],['🥜','Snack','Roasted chana and peanuts'],['🍛','Lunch','Rajma or dal, rice, soya chunks, salad'],['🍌','Pre-workout','Banana and oats'],['🥤','Post-workout','Soy or whey shake and fruit'],['🧀','Dinner','Tofu or paneer, 2 rotis, vegetables']]};
+function meals(m){$('#meals').innerHTML=ML[m].map(a=>C(...a)).join('');$$('[data-m]').forEach(b=>b.classList.toggle('on',b.dataset.m===m));reveal()}
+$$('[data-m]').forEach(b=>b.onclick=()=>meals(b.dataset.m));
+
+// protein
+const PS=[['Chicken breast','100 g cooked',31,'Non-veg'],['Eggs','2 large',12,'Egg'],['Fish (rohu / tuna / salmon)','100 g',23,'Non-veg'],['Whey protein','1 scoop',24,'Supplement'],['Paneer','100 g',19,'Veg'],['Greek yogurt','200 g',19,'Veg'],['Soya chunks','50 g dry',26,'Vegan'],['Tofu','100 g',13,'Vegan'],['Lentils (dal)','1 cup cooked',18,'Vegan'],['Chickpeas / rajma','1 cup cooked',15,'Vegan'],['Milk','250 ml',8,'Veg'],['Peanuts','30 g',8,'Vegan'],['Quinoa','1 cup cooked',8,'Vegan'],['Sattu','30 g',8,'Vegan']];
+let pfl='All';const FT=['All','Non-veg','Egg','Veg','Vegan','Supplement'];
+function prot(){const q=$('#ps').value.toLowerCase();$('#pf').innerHTML=FT.map(f=>`<button class="tab ${f===pfl?'on':''}" data-f="${f}">${f}</button>`).join('');
+$('#pb').innerHTML=PS.filter(r=>(pfl==='All'||r[3]===pfl)&&r[0].toLowerCase().includes(q)).map(r=>`<tr><td><b>${r[0]}</b></td><td>${r[1]}</td><td>${r[2]} g</td><td><div class="pb"><i style="width:${r[2]/31*100}%"></i></div></td><td>${r[3]}</td></tr>`).join('')||'<tr><td colspan="5">No match found</td></tr>'}
+$('#pf').onclick=e=>{if(e.target.dataset.f){pfl=e.target.dataset.f;prot()}};$('#ps').oninput=prot;
+$('#pw').oninput=e=>{const w=+e.target.value,t=$('#pneed');if(w>0){t.style.display='block';t.innerHTML=`<b>Daily protein goal:</b> ${Math.round(w*1.6)}–${Math.round(w*2.2)} g for ${w} kg. About ${Math.round(w*2/4)} g per meal over 4 meals.`}else t.style.display='none'};
+
+// tools
+const TT=[['timer','⏱️ Timer'],['planner','📅 Weekly Planner'],['calc','📏 Calculators'],['track','💧 Trackers']];
+function showTool(k){k=TT.some(t=>t[0]===k)?k:'timer';$('#toolTabs').innerHTML=TT.map(t=>`<a class="tab ${t[0]===k?'on':''}" href="#tools-${t[0]}">${t[1]}</a>`).join('');$$('.tl').forEach(x=>x.style.display=x.id==='t-'+k?'block':'none')}
+let ph=[],pi=0,left=0,iv=null,ac=null;const CI=653.5;
+function beep(f=880,d=.15){try{ac=ac||new(window.AudioContext||window.webkitAudioContext)();const o=ac.createOscillator(),g=ac.createGain();o.frequency.value=f;o.connect(g);g.connect(ac.destination);g.gain.value=.15;o.start();o.stop(ac.currentTime+d)}catch(e){}}
+const fmt=s=>String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');
+function draw(){const p=ph[pi];$('#tclk').textContent=fmt(left);$('#tph').textContent=p?p.n:'READY';$('#trd').textContent=p&&ph.length>1?`ROUND ${Math.floor(pi/2)+1} / ${Math.ceil(ph.length/2)}`:'';
+$('#rg').style.stroke=p&&p.n==='REST'?'var(--c)':'var(--p)';$('#rg').style.strokeDashoffset=p?CI*(1-left/p.t):0}
+function build(){const w=+$('#tw').value||30,r=+$('#tr').value||0,n=+$('#tn').value||1;ph=[];for(let i=0;i<n;i++){ph.push({n:'WORK',t:w});if(r&&i<n-1)ph.push({n:'REST',t:r})}pi=0;left=ph[0].t}
+function tick(){left--;if(left>0&&left<=3)beep(660,.08);if(left<=0){pi++;if(pi>=ph.length){clearInterval(iv);iv=null;ph=[];draw();$('#tph').textContent='DONE 🎉';beep(1100,.6);return}left=ph[pi].t;beep(1000,.3)}draw()}
+function tStart(){if(iv){clearInterval(iv);iv=null;return}if(!ph.length)build();beep(1000,.2);draw();iv=setInterval(tick,1000)}
+function tReset(){clearInterval(iv);iv=null;ph=[];pi=0;left=0;$('#tclk').textContent='00:00';draw()}
+function tRest(s){clearInterval(iv);ph=[{n:'REST',t:s}];pi=0;left=s;draw();iv=setInterval(tick,1000)}
+const DAYS=['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'],OPT=['Rest','Chest + Triceps','Back + Biceps','Legs','Shoulders + Abs','Push','Pull','Upper Body','Lower Body','Full Body','HIIT','Cardio','Yoga / Mobility'];
+const dp=()=>['Chest + Triceps','Back + Biceps','Legs','Shoulders + Abs','Full Body','HIIT','Rest'].map(w=>({w,t:'18:00',n:''}));
+let pl=LS.g('plan',null);if(!Array.isArray(pl)||pl.length!==7)pl=dp();
+function rPlan(){$('#planner').innerHTML=DAYS.map((d,i)=>`<tr><td><b>${d}</b></td><td><select data-i="${i}" data-k="w">${OPT.map(o=>`<option ${o===pl[i].w?'selected':''}>${o}</option>`).join('')}</select></td><td><input type="time" data-i="${i}" data-k="t" value="${pl[i].t}"></td><td><input data-i="${i}" data-k="n" value="${pl[i].n.replace(/"/g,'&quot;')}" placeholder="e.g. 5 km run"></td></tr>`).join('')}
+$('#planner').addEventListener('input',e=>{const i=e.target.dataset.i;if(i!==undefined){pl[i][e.target.dataset.k]=e.target.value;LS.s('plan',pl)}});
+function clearPlan(){pl=dp();LS.s('plan',pl);rPlan()}
+function bmi(){const h=+$('#bh').value/100,w=+$('#bw').value;if(!(h>0&&w>0))return;const b=w/(h*h);$('#gm').style.left=Math.min(97,Math.max(0,(b-15)/25*100))+'%';
+$('#bmiRes').innerHTML=`<div><b>${b.toFixed(1)}</b><span>BMI</span></div><div><b>${b<18.5?'Under':b<25?'Healthy':b<30?'Over':'Obese'}</b><span>Category</span></div><div><b>${(18.5*h*h).toFixed(0)}–${(24.9*h*h).toFixed(0)}</b><span>Healthy kg</span></div>`}
+function orm(){const w=+$('#ow').value,r=+$('#orp').value;if(!(w>0&&r>0))return;const m=r===1?w:w*(1+r/30);$('#ormRes').innerHTML=`<div><b>${m.toFixed(1)}</b><span>1RM kg</span></div><div><b>${(m*.85).toFixed(0)}</b><span>85% ≈ 5 reps</span></div><div><b>${(m*.75).toFixed(0)}</b><span>75% ≈ 10 reps</span></div><div><b>${(m*.65).toFixed(0)}</b><span>65% ≈ 15 reps</span></div>`}
+['bh','bw'].forEach(i=>$('#'+i).addEventListener('input',bmi));['ow','orp'].forEach(i=>$('#'+i).addEventListener('input',orm));
+const td=new Date().toDateString();let wd=LS.g('water',{});let wl=wd.day===td?wd.v:0;
+function water(a){wl=a?Math.min(wl+a,10):0;LS.s('water',{day:td,v:wl});$('#wTxt').textContent=wl.toFixed(2).replace(/\.?0+$/,'')+' L';$('#wBar').style.width=Math.min(100,wl/3.5*100)+'%'}
+let wlog=LS.g('wlog',[]);
+function addW(){const v=+$('#lw').value;if(!(v>0))return;wlog.push({d:new Date().toLocaleDateString(),v});wlog=wlog.slice(-30);LS.s('wlog',wlog);$('#lw').value='';sp()}
+function sp(){const s=$('#spark');if(!wlog.length){s.innerHTML='';$('#wInfo').textContent='Add your first entry to see the trend.';return}
+const v=wlog.map(x=>x.v),mn=Math.min(...v)-1,mx=Math.max(...v)+1,pts=v.map((y,i)=>[v.length>1?i/(v.length-1)*290+5:150,85-(y-mn)/(mx-mn)*78]);
+s.innerHTML=`<polyline points="${pts.map(p=>p.join(',')).join(' ')}" fill="none" stroke="var(--p)" stroke-width="3" stroke-linecap="round"/>`+pts.map(p=>`<circle cx="${p[0]}" cy="${p[1]}" r="4" fill="var(--s)"/>`).join('');
+const d=v[v.length-1]-v[0];$('#wInfo').textContent=`Latest ${v[v.length-1]} kg · change ${d>0?'+':''}${d.toFixed(1)} kg over ${v.length} entries`}
+
+// dynamic effects
+function reveal(){const els=$$('.page.active .rv');if(!('IntersectionObserver'in window)){els.forEach(e=>e.classList.add('in'));return}
+const io=new IntersectionObserver(en=>en.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{threshold:.12});els.forEach((e,i)=>{e.classList.remove('in');e.style.transitionDelay=(i%4)*70+'ms';io.observe(e)})}
+function counters(){$$('[data-n]').forEach(e=>{const n=+e.dataset.n;let c=0;const t=setInterval(()=>{c+=Math.ceil(n/30);if(c>=n){c=n;clearInterval(t)}e.textContent=c},35)})}
+const exN=Object.values(PLANS).reduce((s,p)=>s+p.d.reduce((a,d)=>a+d[1].length,0),0);
+$('#stats').innerHTML=[[3,'Workout plans'],[exN,'Exercises listed'],[PS.length,'Protein foods'],[7,'Pages & tools']].map(s=>`<div class="stat rv"><b data-n="${s[0]}">0</b><span>${s[1]}</span></div>`).join('');
+const W=['STRONGER','LEANER','FASTER','BIGGER','FITTER'];let wi=0;setInterval(()=>{const e=$('#rw');e.style.opacity=0;e.style.transform='translateY(14px)';setTimeout(()=>{wi=(wi+1)%W.length;e.textContent=W[wi];e.style.opacity=1;e.style.transform='none'},400)},2600);
+const QS=['The last rep is where the growth begins.','Discipline beats motivation every single day.','Small progress is still progress.','You don’t have to be extreme, just consistent.','Sweat now, shine later.','Strong is built one set at a time.'];let qi=0;
+const qe=$('#quote');qe.textContent=QS[0];setInterval(()=>{qe.style.opacity=0;setTimeout(()=>{qi=(qi+1)%QS.length;qe.textContent=QS[qi];qe.style.opacity=1},400)},4500);
+document.addEventListener('mousemove',e=>{const c=e.target.closest&&e.target.closest('.card');if(c){const r=c.getBoundingClientRect();c.style.setProperty('--mx',e.clientX-r.left+'px');c.style.setProperty('--my',e.clientY-r.top+'px')}});
+
+// ===== BACKEND LAYER (claude db when published, localStorage demo otherwise) =====
+let DB=null,USER=null,AI=null,ME=null,OWN=false,UID='',DEMO=false,TAB='home',EDIT='',SD=null,MQ='',AD='',DELC=false,busy=0;
+const ST={members:[],pays:[],att:[],inbox:[],set:null,myPay:null,myAtt:null,myN:null,allN:null,myIn:null};
+const un=[],subs=new Set(),CH=[];
+const ymd=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+const TD=()=>ymd(new Date());
+const E=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const fd=t=>new Date(t).toLocaleString([],{dateStyle:'medium',timeStyle:'short'});
+const addM=(s,m)=>{const d=new Date(s+'T00:00:00');d.setMonth(d.getMonth()+m);return ymd(d)};
+let tt=0;function toast(m){let t=$('#toast');if(!t){t=document.createElement('div');t.id='toast';t.className='toast';document.body.appendChild(t)}t.textContent=m;t.classList.add('s');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('s'),3200)}
+let TOK=LS.g('tok',null);
+async function api(m,p,b){const r=await fetch('/api'+p,{method:m,headers:{'Content-Type':'application/json',...(TOK?{Authorization:'Bearer '+TOK}:{})},body:b?JSON.stringify(b):undefined});const j=await r.json().catch(()=>({}));if(r.status===401&&TOK){logout();throw Error('Session expired. Sign in again.')}if(!r.ok)throw Error(j.error||'Request failed');return j}
+const poll=()=>subs.forEach(f=>f());
+const rd=p=>api('GET','/doc/'+p).then(r=>r.data);
+const wr=(p,o)=>api('PUT','/doc/'+p,o).then(poll);
+const del=p=>api('DELETE','/doc/'+p).then(poll);
+function wcol(c,cb){const f=()=>api('GET','/col/'+c).then(r=>cb(r.docs.map(d=>({id:d.id,...d.data})))).catch(()=>{});subs.add(f);f()}
+function wdoc(p,cb){const f=()=>api('GET','/doc/'+p).then(r=>cb(r.data)).catch(()=>{});subs.add(f);f()}
+setInterval(()=>{if(ME&&!document.hidden)poll()},5000);
+async function run(f){try{await f()}catch(e){toast('Failed: '+((e&&e.message)||'no permission. Ask the owner for Contributor access.'))}}
+
+// ===== DOMAIN HELPERS =====
+const DEF={name:'IronPulse Fitness',timings:'Mon–Sat 5:30 AM–10 PM · Sun 6 AM–12 PM',upi:'',plans:[{n:'Monthly',fee:1500,m:1},{n:'Quarterly',fee:4000,m:3},{n:'Half-yearly',fee:7000,m:6},{n:'Yearly',fee:12000,m:12}]};
+const sett=()=>ST.set&&ST.set.plans&&ST.set.plans.length?ST.set:DEF;
+const dleft=p=>p&&p.due?Math.round((new Date(p.due+'T00:00:00')-new Date(TD()+'T00:00:00'))/864e5):null;
+const pst=p=>{const d=dleft(p);return d===null?['Not enrolled','gr']:d<0?['Overdue','r']:d<=5?['Due in '+d+'d','a']:['Active','g']};
+const notes=()=>[...((ST.allN&&ST.allN.items)||[]),...((ST.myN&&ST.myN.items)||[])].sort((a,b)=>b.ts-a.ts);
+const nrow=n=>`<div class="nt"><b>${E(n.title)}</b><small>${fd(n.ts)}</small><p>${E(n.msg)}</p></div>`;
+function streak(a){let n=0,d=new Date();if(!a.includes(ymd(d)))d.setDate(d.getDate()-1);while(a.includes(ymd(d))){n++;d.setDate(d.getDate()-1)}return n}
+function cal(days){const n=new Date(),y=n.getFullYear(),m=n.getMonth(),f=new Date(y,m,1).getDay(),l=new Date(y,m+1,0).getDate();let h='<div class="cal">'+'SMTWTFS'.split('').map(d=>`<b>${d}</b>`).join('')+'<i></i>'.repeat(f);for(let d=1;d<=l;d++){const k=ymd(new Date(y,m,d));h+=`<span class="${days.includes(k)?'hit':''} ${k===TD()?'tdy':''}">${d}</span>`}return h+'</div>'}
+async function pushN(to,title,msg){const p=to==='all'?'notices/all':'notices/'+to,cur=await rd(p)||{items:[]};await wr(p,{items:[{id:Date.now().toString(36),title,msg,ts:Date.now()},...(cur.items||[])].slice(0,30)})}
+
+// ===== VIEWS =====
+const VW={o:{},m:{}};
+VW.m.home=()=>{const a=(ST.myAtt&&ST.myAtt.days)||[],p=ST.myPay,[st,sc]=pst(p),did=a.includes(TD()),mo=a.filter(x=>x.slice(0,7)===TD().slice(0,7)).length,n=notes().slice(0,3),dl=Math.max(0,dleft(p)||0);
+return `<div class="two"><div class="card"><h3>Hi ${E(ME.name.split(' ')[0])} 👋</h3><p>${E(sett().timings)}</p><div class="btns" style="justify-content:flex-start"><button class="btn" data-act="checkin" ${did?'disabled style="opacity:.55"':''}>${did?'✅ Checked in today':'📍 Check in for today'}</button></div><div class="res"><div><b>${streak(a)}</b><span>Day streak</span></div><div><b>${mo}</b><span>This month</span></div><div><b>${a.length}</b><span>Total visits</span></div></div></div>
+<div class="card"><h3>Membership</h3>${p?`<p>${E(p.plan)} · ₹${p.fee}</p><div class="res"><div><b>${dl}</b><span>Days left</span></div><div><b class="sm">${p.due}</b><span>Valid till</span></div></div><p style="margin-top:10px"><span class="bd ${sc}">${st}</span></p>`:'<p>You are not enrolled in a plan yet. Please visit the front desk to activate your membership.</p>'}</div></div>
+<div class="two" style="margin-top:18px"><div class="card"><h3>This Month</h3>${cal(a)}</div><div class="card"><h3>Latest alerts</h3>${n.map(nrow).join('')||'<p>No alerts yet.</p>'}<div class="btns" style="justify-content:flex-start"><a class="btn o sm" href="#app-alerts">All alerts</a></div></div></div>`};
+VW.m.payments=()=>{const p=ST.myPay,s=sett(),[st,sc]=pst(p);
+return `<div class="two"><div class="card"><h3>Payment Status</h3>${p?`<p>${E(p.plan)} · ₹${p.fee}<br>Valid till <b>${p.due}</b></p><span class="bd ${sc}">${st}</span>`:'<p>No plan assigned yet.</p>'}<h3 style="margin-top:18px">Payment modes</h3><p>💵 Cash · 📱 UPI · 💳 Card · 🏦 Net banking (at the front desk)</p>${s.upi?`<p>UPI ID: <b>${E(s.upi)}</b></p><a class="btn sm" target="_blank" rel="noopener" href="upi://pay?pa=${encodeURIComponent(s.upi)}&pn=${encodeURIComponent(s.name)}${p?'&am='+p.fee:''}&cu=INR">Pay via UPI app</a><p style="font-size:13px">After paying, message the owner in Alerts so the payment is marked.</p>`:''}</div>
+<div class="card"><h3>History</h3>${p&&p.entries&&p.entries.length?`<div class="ow"><table><thead><tr><th>Date</th><th>Plan</th><th>Amount</th><th>Mode</th></tr></thead><tbody>${p.entries.map(e=>`<tr><td>${e.date}</td><td>${E(e.plan||'')}</td><td>₹${e.amt}</td><td>${E(e.mode)}</td></tr>`).join('')}</tbody></table></div>`:'<p>No payments recorded yet.</p>'}</div></div>`};
+VW.m.alerts=()=>`<div class="two"><div class="card"><h3>Notifications</h3>${notes().map(nrow).join('')||'<p>No alerts yet.</p>'}</div><div class="card"><h3>Message the owner</h3><textarea id="mo" rows="3" placeholder="Ask about fees, timings, trainers…"></textarea><div class="btns" style="justify-content:flex-start"><button class="btn sm" data-act="msg">Send</button></div><h3 style="margin-top:18px">Your messages</h3>${((ST.myIn&&ST.myIn.items)||[]).map(i=>`<div class="nt"><small style="margin:0">${fd(i.ts)}</small><p>${E(i.text)}</p></div>`).join('')||'<p>None yet.</p>'}</div></div>`;
+VW.m.assistant=()=>`<div class="card"><h3>🤖 Pulse Assistant</h3><div id="chat" class="chat"></div><div class="row" style="grid-template-columns:1fr auto;margin-top:10px"><input id="cq" placeholder="Ask about workouts, diet, fees, attendance…"><button class="btn sm" data-act="ask">Send</button></div><div class="btns" style="justify-content:flex-start">${['When is my fee due?','Diet for muscle gain','Best chest exercises','How many calories should I eat?'].map(q=>`<button class="tab" data-act="chip">${q}</button>`).join('')}</div></div>`;
+
+VW.o.home=()=>{const m=ST.members,pres=ST.att.filter(a=>(a.days||[]).includes(TD())),od=ST.pays.filter(p=>dleft(p)<0),ym=TD().slice(0,7),rev=ST.pays.reduce((s,p)=>s+(p.entries||[]).filter(e=>e.date.slice(0,7)===ym).reduce((a,e)=>a+e.amt,0),0);
+return `<div class="res big">${[[m.length,'Members'],[pres.length,'Present today'],[ST.pays.filter(p=>dleft(p)>=0).length,'Active plans'],[od.length,'Overdue'],['₹'+rev,'Revenue this month'],[ST.inbox.reduce((s,i)=>s+(i.items||[]).length,0),'Messages']].map(x=>`<div><b>${x[0]}</b><span>${x[1]}</span></div>`).join('')}</div>
+<div class="two" style="margin-top:18px"><div class="card"><h3>Today’s Attendance</h3>${pres.map(a=>`<div class="nt"><b>${E(a.name)}</b></div>`).join('')||'<p>No check-ins yet.</p>'}</div><div class="card"><h3>Overdue Payments</h3>${od.map(p=>`<div class="nt"><b>${E(p.name)}</b> <span class="bd r">${-dleft(p)}d late</span><div class="btns" style="justify-content:flex-start"><button class="btn o sm" data-act="remind" data-u="${p.id}">Send reminder</button></div></div>`).join('')||'<p>No overdue members 🎉</p>'}</div></div>
+<div class="tip"><b>How members join:</b> share this page’s link. Members sign in with name and mobile number and appear under Members. Then assign a plan from Payments.</div>`};
+const mtable=()=>{const q=MQ.toLowerCase(),r=ST.members.filter(m=>((m.name||'')+(m.phone||'')).toLowerCase().includes(q)).map(m=>{const p=ST.pays.find(x=>x.id===m.id),a=ST.att.find(x=>x.id===m.id),[s,c]=pst(p);return `<tr><td><b>${E(m.name)}</b></td><td>${E(m.phone)}</td><td>${p?E(p.plan):'—'}</td><td>${p?p.due:'—'}</td><td><span class="bd ${c}">${s}</span></td><td>${a&&a.days&&a.days.length?a.days[a.days.length-1]:'—'}</td><td><button class="btn o sm" data-act="edit" data-u="${m.id}">Edit</button></td></tr>`}).join('');return `<div class="ow"><table><thead><tr><th>Name</th><th>Phone</th><th>Plan</th><th>Valid till</th><th>Status</th><th>Last visit</th><th></th></tr></thead><tbody>${r||'<tr><td colspan="7">No members yet. They appear after signing in.</td></tr>'}</tbody></table></div>`};
+const ecard=()=>{const m=ST.members.find(x=>x.id===EDIT);if(!m)return'';const p=ST.pays.find(x=>x.id===EDIT)||{},s=sett();return `<div class="card" style="margin-bottom:16px"><h3>Edit ${E(m.name)}</h3><div class="row"><div><label class="f">Plan</label><select id="ep">${s.plans.map(x=>`<option ${x.n===p.plan?'selected':''}>${E(x.n)}</option>`).join('')}</select></div><div><label class="f">Fee (₹)</label><input id="ef" type="number" value="${p.fee||s.plans[0].fee}"></div></div><label class="f">Valid till</label><input id="ed" type="date" value="${p.due||TD()}"><div class="btns" style="justify-content:flex-start"><button class="btn sm" data-act="saveM">Save</button><button class="btn o sm" data-act="cancel">Cancel</button><button class="btn o sm" data-act="delM" style="color:#ef4444">${DELC?'Click again to confirm':'Remove member'}</button></div></div>`};
+VW.o.members=()=>`${ecard()}<input id="ms" placeholder="Search by name or phone" value="${E(MQ)}" style="margin-bottom:14px"><div class="card" id="ml">${mtable()}</div>`;
+VW.o.attendance=()=>{const d=AD||TD(),pres=ST.att.filter(a=>(a.days||[]).includes(d)),ym=d.slice(0,7);
+return `<div class="two"><div class="card"><h3>Attendance</h3><label class="f">Date</label><input type="date" id="ad" value="${d}"><p style="margin-top:10px"><b>${pres.length}</b> of ${ST.members.length} present</p>${pres.map(a=>`<div class="nt"><b>${E(a.name)}</b><button class="btn o sm" data-act="unmark" data-u="${a.id}" style="float:right">Remove</button></div>`).join('')||'<p>Nobody marked.</p>'}<label class="f">Mark manually</label><div class="row" style="grid-template-columns:1fr auto"><select id="am">${ST.members.map(m=>`<option value="${m.id}">${E(m.name)}</option>`).join('')}</select><button class="btn sm" data-act="mark">Mark present</button></div></div>
+<div class="card"><h3>Monthly summary · ${ym}</h3><div class="ow"><table><thead><tr><th>Member</th><th>Days</th><th></th></tr></thead><tbody>${ST.members.map(m=>{const a=ST.att.find(x=>x.id===m.id),n=a?(a.days||[]).filter(x=>x.slice(0,7)===ym).length:0;return `<tr><td>${E(m.name)}</td><td>${n}</td><td><div class="pb"><i style="width:${Math.min(100,n/26*100)}%"></i></div></td></tr>`}).join('')}</tbody></table></div></div></div>`};
+const MODES=['Cash','UPI','Card','Net banking','Cheque'];
+VW.o.payments=()=>{const s=sett(),all=ST.pays.flatMap(p=>(p.entries||[]).map(e=>({...e,name:p.name}))).sort((a,b)=>b.date.localeCompare(a.date)||b.id.localeCompare(a.id)).slice(0,40),tot=MODES.map(m=>[m,all.filter(e=>e.mode===m).reduce((a,e)=>a+e.amt,0)]),mx=Math.max(1,...tot.map(x=>x[1]));
+return `<div class="two"><div class="card"><h3>Record Payment</h3><label class="f">Member</label><select id="pm">${ST.members.map(m=>`<option value="${m.id}">${E(m.name)} (${E(m.phone)})</option>`).join('')}</select><label class="f">Plan</label><select id="pp">${s.plans.map((p,i)=>`<option value="${i}">${E(p.n)} · ₹${p.fee}</option>`).join('')}</select><div class="row"><div><label class="f">Amount (₹)</label><input id="pa" type="number" value="${s.plans[0].fee}"></div><div><label class="f">Mode</label><select id="pmo">${MODES.map(m=>`<option>${m}</option>`).join('')}</select></div></div><label class="f">Note</label><input id="pn" placeholder="optional"><div class="btns" style="justify-content:flex-start"><button class="btn" data-act="pay">Save payment</button></div><h3 style="margin-top:22px">By mode (last 40)</h3>${tot.map(x=>`<div style="font-size:14px">${x[0]} · ₹${x[1]}<div class="pb"><i style="width:${x[1]/mx*100}%"></i></div></div>`).join('')}</div>
+<div class="card"><h3>Recent Payments</h3><div class="ow"><table><thead><tr><th>Date</th><th>Member</th><th>Amount</th><th>Mode</th></tr></thead><tbody>${all.map(e=>`<tr><td>${e.date}</td><td>${E(e.name)}</td><td>₹${e.amt}</td><td>${E(e.mode)}</td></tr>`).join('')||'<tr><td colspan="4">No payments yet.</td></tr>'}</tbody></table></div></div></div>`};
+VW.o.notify=()=>{const ms=ST.inbox.flatMap(i=>(i.items||[]).map(x=>({...x,u:i.id,name:i.name}))).sort((a,b)=>b.ts-a.ts).slice(0,30);
+return `<div class="two"><div class="card"><h3>Send Notification</h3><label class="f">To</label><select id="nt"><option value="all">All members</option>${ST.members.map(m=>`<option value="${m.id}">${E(m.name)}</option>`).join('')}</select><label class="f">Title</label><input id="ntt" placeholder="e.g. Holiday notice"><label class="f">Message</label><textarea id="nm" rows="3"></textarea><div class="btns" style="justify-content:flex-start"><button class="btn" data-act="send">Send</button></div></div>
+<div class="card"><h3>Member Messages</h3>${ms.map(x=>`<div class="nt"><b>${E(x.name)}</b><small>${fd(x.ts)}</small><p>${E(x.text)}</p><button class="btn o sm" data-act="reply" data-u="${x.u}">Reply</button></div>`).join('')||'<p>No messages.</p>'}</div></div>`};
+VW.o.settings=()=>{const s=SD||(SD=JSON.parse(JSON.stringify(sett())));
+return `<div class="card"><h3>Gym Details</h3><label class="f">Gym name</label><input id="sn" value="${E(s.name)}"><label class="f">Timings</label><input id="st" value="${E(s.timings)}"><label class="f">UPI ID (optional)</label><input id="su" value="${E(s.upi||'')}" placeholder="gym@upi"><h3 style="margin-top:20px">Membership Plans</h3>${s.plans.map((p,i)=>`<div class="row pr" style="grid-template-columns:2fr 1fr 1fr auto;margin-top:8px;align-items:end"><div><label class="f">Plan</label><input class="pn" value="${E(p.n)}"></div><div><label class="f">Fee ₹</label><input class="pf" type="number" value="${p.fee}"></div><div><label class="f">Months</label><input class="pm" type="number" value="${p.m||1}"></div><button class="btn o sm" data-act="rmPlan" data-i="${i}">✕</button></div>`).join('')}<div class="btns" style="justify-content:flex-start"><button class="btn o sm" data-act="addPlan">+ Add plan</button><button class="btn" data-act="saveS">Save settings</button></div></div>`};
+function colS(){const s=SD||JSON.parse(JSON.stringify(sett()));s.name=$('#sn').value;s.timings=$('#st').value;s.upi=$('#su').value.trim();s.plans=$$('.pr').map(r=>({n:$('.pn',r).value||'Plan',fee:+$('.pf',r).value||0,m:+$('.pm',r).value||1}));return SD=s}
+
+// ===== CHATBOT =====
+function faq(q){q=q.toLowerCase();const p=ST.myPay,s=sett();
+if(/fee|due|paid|payment|membership/.test(q))return p?`Your ${p.plan} plan is valid till ${p.due} (${pst(p)[0]}).`:'You are not enrolled yet. Please contact the front desk.';
+if(/time|open|close/.test(q))return 'Gym timings: '+s.timings;
+if(/attend|streak|visit/.test(q)){const a=(ST.myAtt&&ST.myAtt.days)||[];return `You have ${a.length} visits and a ${streak(a)}-day streak.`}
+if(/protein/.test(q))return 'Aim for 1.6–2.2 g protein per kg body weight daily: eggs, chicken, fish, paneer, soya, dal and whey.';
+if(/calor|diet|eat|bulk|lean/.test(q))return 'Use the Nutrition page calculator: BMR × activity, then −400 kcal to cut or +350 to lean bulk.';
+if(/chest|back|leg|shoulder|arm|workout|exercise/.test(q))return 'See the Workouts page for general, lean and bulk plans. Train 3–5 days a week and add weight gradually.';
+return 'I can help with workouts, diet, fees, attendance and timings. For anything else, use “Message the owner” in Alerts.'}
+function pChat(){const c=$('#chat');if(!c)return;const l=CH.length?CH:[{role:'assistant',content:`Hi ${ME.name.split(' ')[0]}! I’m Pulse. Ask me about workouts, diet, calories or your membership.`}];c.innerHTML=l.map(m=>`<div class="bub ${m.role==='user'?'u':'b'}">${E(m.content)}</div>`).join('');c.scrollTop=c.scrollHeight}
+async function ask(q){q=(q||'').trim();if(!q||busy)return;busy=1;const x=$('#cq');if(x)x.value='';CH.push({role:'user',content:q},{role:'assistant',content:'…'});pChat();const i2=CH.length-1;
+try{const r=await api('POST','/chat',{messages:CH.slice(0,-1)});CH[i2].content=r.text||faq(q)}catch(e){CH[i2].content=faq(q)}
+busy=0;pChat()}
+
+// ===== APP SHELL =====
+const TABS={o:[['home','📊 Dashboard'],['members','👥 Members'],['attendance','🗓️ Attendance'],['payments','💳 Payments'],['notify','🔔 Notify'],['settings','⚙️ Settings']],m:[['home','🏠 Home'],['payments','💳 Payments'],['alerts','🔔 Alerts'],['assistant','🤖 Assistant']]};
+function rApp(){if(!ME)return;const r=OWN?'o':'m';if(!TABS[r].some(t=>t[0]===TAB))TAB='home';
+$('#appTabs').innerHTML=TABS[r].map(t=>`<a class="tab ${t[0]===TAB?'on':''}" href="#app-${t[0]}">${t[1]}</a>`).join('');
+$('#appRoot').innerHTML=VW[r][TAB]();$('#appH').innerHTML=OWN?'Owner <span class="grad">Panel</span>':'My <span class="grad">Gym</span>';
+$('#appP').textContent=OWN?'Manage members, attendance, payments and notifications.':sett().name+' · '+sett().timings;
+if(TAB==='assistant')pChat();if(TAB==='alerts'||TAB==='notify'){LS.s('seen'+UID,Date.now());updBell()}}
+let pt=0;function paint(){clearTimeout(pt);pt=setTimeout(()=>{if(!ME)return;updBell();const root=$('#appRoot');if(!root||!$('#p-app').classList.contains('active'))return;const a=document.activeElement;if(a&&root.contains(a)&&/INPUT|TEXTAREA|SELECT/.test(a.tagName))return;rApp()},40)}
+function updBell(){const seen=LS.g('seen'+UID,0);let n=0;if(OWN)ST.inbox.forEach(i=>(i.items||[]).forEach(x=>{if(x.ts>seen)n++}));else notes().forEach(x=>{if(x.ts>seen)n++});const b=$('#bn');if(b){b.textContent=n||'';b.style.display=n?'inline-block':'none'}}
+function start(){un.splice(0).forEach(f=>f());subs.clear();Object.keys(ST).forEach(k=>ST[k]=Array.isArray(ST[k])?[]:null);
+wdoc('settings/gym',d=>{ST.set=d;if(TAB!=='settings')SD=null;paint()});wdoc('notices/all',d=>{ST.allN=d;paint()});
+if(OWN)[['members','members'],['payments','pays'],['attendance','att'],['inbox','inbox']].forEach(([c,k])=>wcol(c,l=>{ST[k]=l;paint()}));
+else[['payments/'+UID,'myPay'],['attendance/'+UID,'myAtt'],['notices/'+UID,'myN'],['inbox/'+UID,'myIn']].forEach(([p,k])=>wdoc(p,d=>{ST[k]=d?{id:UID,...d}:null;paint()}))}
+
+// ===== ACTIONS =====
+const ACT={
+checkin:()=>run(async()=>{const a=(ST.myAtt&&ST.myAtt.days)||[];if(a.includes(TD()))return;await wr('attendance/'+UID,{name:ME.name,days:[...a,TD()].slice(-200),last:Date.now()});toast(dleft(ST.myPay)<0?'Checked in. Your membership has expired, please renew.':'Checked in. Great workout! 💪')}),
+msg:()=>run(async()=>{const t=($('#mo').value||'').trim();if(!t)return;const c=(ST.myIn&&ST.myIn.items)||[];await wr('inbox/'+UID,{name:ME.name,phone:ME.phone,items:[{id:Date.now().toString(36),text:t,ts:Date.now()},...c].slice(0,40)});toast('Message sent to the owner')}),
+ask:()=>ask($('#cq').value),chip:b=>ask(b.textContent),
+remind:b=>run(async()=>{const p=ST.pays.find(x=>x.id===b.dataset.u);await pushN(b.dataset.u,'Payment reminder','Your membership expired on '+p.due+'. Please renew at the front desk or via UPI.');toast('Reminder sent')}),
+edit:b=>{EDIT=b.dataset.u;DELC=false;rApp();scrollTo(0,0)},cancel:()=>{EDIT='';DELC=false;rApp()},
+saveM:()=>run(async()=>{const m=ST.members.find(x=>x.id===EDIT),p=ST.pays.find(x=>x.id===EDIT)||{entries:[]};await wr('payments/'+EDIT,{name:m.name,plan:$('#ep').value,fee:+$('#ef').value||0,due:$('#ed').value||TD(),entries:p.entries||[]});EDIT='';toast('Member updated');rApp()}),
+delM:()=>{if(!DELC){DELC=true;rApp();return}run(async()=>{for(const c of['members','payments','attendance','inbox','notices'])await del(c+'/'+EDIT);EDIT='';DELC=false;toast('Member removed');rApp()})},
+mark:()=>run(async()=>{const u=$('#am').value,m=ST.members.find(x=>x.id===u);if(!m)return;const d=AD||TD(),a=ST.att.find(x=>x.id===u),days=[...new Set([...((a&&a.days)||[]),d])].sort();await wr('attendance/'+u,{name:m.name,days:days.slice(-200),last:Date.now()});toast('Marked present')}),
+unmark:b=>run(async()=>{const u=b.dataset.u,a=ST.att.find(x=>x.id===u),d=AD||TD();await wr('attendance/'+u,{name:a.name,days:(a.days||[]).filter(x=>x!==d),last:a.last||0})}),
+pay:()=>run(async()=>{const u=$('#pm').value,pl=sett().plans[+$('#pp').value],amt=+$('#pa').value,mode=$('#pmo').value;if(!u||!(amt>0))return toast('Choose a member and amount');const m=ST.members.find(x=>x.id===u),cur=ST.pays.find(x=>x.id===u)||{entries:[]},base=cur.due&&cur.due>TD()?cur.due:TD(),due=addM(base,pl.m||1);
+await wr('payments/'+u,{name:m.name,plan:pl.n,fee:pl.fee,due,entries:[{id:Date.now().toString(36),amt,mode,date:TD(),plan:pl.n,note:$('#pn').value.trim()},...(cur.entries||[])].slice(0,60)});
+await pushN(u,'Payment received','₹'+amt+' received via '+mode+'. '+pl.n+' plan valid till '+due+'. Thank you!');toast('Payment recorded')}),
+send:()=>run(async()=>{const t=$('#ntt').value.trim(),m=$('#nm').value.trim();if(!t||!m)return toast('Add a title and message');await pushN($('#nt').value,t,m);$('#ntt').value='';$('#nm').value='';toast('Notification sent')}),
+reply:b=>{$('#nt').value=b.dataset.u;$('#ntt').value='Reply from the gym';$('#nm').focus()},
+addPlan:()=>{colS().plans.push({n:'New plan',fee:1000,m:1});rApp()},rmPlan:b=>{const s=colS();if(s.plans.length>1)s.plans.splice(+b.dataset.i,1);rApp()},
+saveS:()=>run(async()=>{const s=colS();await wr('settings/gym',s);SD=null;toast('Settings saved')})};
+document.addEventListener('click',e=>{const b=e.target.closest('#appRoot [data-act]');if(b&&ACT[b.dataset.act])ACT[b.dataset.act](b,e)});
+document.addEventListener('input',e=>{if(e.target.id==='ms'){MQ=e.target.value;$('#ml').innerHTML=mtable()}});
+document.addEventListener('change',e=>{if(e.target.id==='pp')$('#pa').value=sett().plans[+e.target.value].fee;if(e.target.id==='ad'){AD=e.target.value;rApp()}});
+document.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.id==='cq')ask(e.target.value);if(e.key==='Enter'&&(e.target.id==='ln'||e.target.id==='lp'||e.target.id==='lotp'))$('#lb').click()});
+
+// ===== LOGIN (mobile OTP) =====
+let step=0;
+async function enter(u){ME={name:u.name,phone:u.phone};OWN=u.role==='owner';UID=u.id;PG[7][1]=OWN?'Owner Panel':'My Gym';mkNav();
+$('#who').innerHTML=`<button class="ib" id="bell" title="Notifications">🔔<span id="bn" class="bn"></span></button><button class="ib" id="lo" title="Sign out">${OWN?'👑':'👤'} ${E(u.name.split(' ')[0])} ⎋</button>`;
+if(!OWN){const m=await rd('members/'+UID).catch(()=>null);await wr('members/'+UID,{name:u.name,phone:u.phone,joined:(m&&m.joined)||TD()}).catch(()=>{})}
+document.body.classList.add('in');start();TAB='home';if(location.hash==='#app-home')route();else location.hash='#app-home'}
+function logout(){un.splice(0).forEach(f=>f());subs.clear();ME=null;TOK=null;LS.s('tok',null);CH.length=0;step=0;document.body.classList.remove('in');$('#who').innerHTML='';$('#lotp').style.display='none';$('#lotp').value='';$('#lb').textContent='Send OTP';$('#lm').textContent='';location.hash=''}
+$('#who').addEventListener('click',e=>{if(e.target.closest('#bell')){LS.s('seen'+UID,Date.now());location.hash=OWN?'#app-notify':'#app-alerts'}if(e.target.closest('#lo'))logout()});
+$('#lb').onclick=()=>run(async()=>{const n=$('#ln').value.trim(),p=$('#lp').value.replace(/\D/g,'').slice(-10);
+if(step===0){if(n.length<2)return toast('Please enter your name');if(p.length<10)return toast('Enter a valid 10-digit mobile number');
+const r=await api('POST','/otp',{name:n,phone:p});LS.s('pref',{name:n,phone:p});step=1;$('#lotp').style.display='block';$('#lotp').focus();$('#lb').textContent='Verify & Sign in';$('#lm').textContent=r.dev?'Test mode, your code is '+r.dev:'We sent a 6-digit code to +91 '+p;return}
+const r=await api('POST','/verify',{name:n,phone:p,otp:$('#lotp').value.trim()});TOK=r.token;LS.s('tok',TOK);await enter(r.user)});
+async function boot(){$('#lb').disabled=false;$('#lb').textContent='Send OTP';const pf=LS.g('pref',null);if(pf){$('#ln').value=pf.name;$('#lp').value=pf.phone}
+if(TOK){try{const r=await api('GET','/me');await enter(r.user)}catch(e){}}}
+
+// router
+function route(){const[p,s]=(location.hash||'#home').slice(1).split('-'),pg=PG.some(x=>x[0]===p)?p:'home';
+$$('.page').forEach(x=>x.classList.toggle('active',x.id==='p-'+pg));$$('.nav a.l').forEach(a=>a.classList.toggle('on',a.dataset.p===pg));
+document.body.classList.remove('menu');if(pg==='workouts')showPlan(s);if(pg==='tools')showTool(s);if(pg==='app'&&ME){TAB=s||'home';DELC=false;rApp()}
+document.title='IronPulse – '+PG.find(x=>x[0]===pg)[1];window.scrollTo(0,0);reveal();if(pg==='home')counters()}
+addEventListener('hashchange',route);
+rPlan();calc();meals('nv');prot();bmi();orm();sp();draw();
+(function(){const d=LS.g('water',{});wl=d.day===td?d.v:0;$('#wTxt').textContent=(wl?wl.toFixed(2).replace(/\.?0+$/,''):'0')+' L';$('#wBar').style.width=Math.min(100,wl/3.5*100)+'%'})();
+route();boot();
+</script>
+</body>
+</html>
